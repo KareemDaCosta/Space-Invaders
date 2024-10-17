@@ -16,6 +16,11 @@ void setup() {
 void loop() {
   int buttonState = digitalRead(BUTTON_PIN);
   int potentiometerState = analogRead(POTENTIOMETER_PIN);
+  int xJoystick = analogRead(xyzPins[0]);
+  int yJoystick = analogRead(xyzPins[1]);
+  int zJoystick = digitalRead(xyzPins[2]);
+
+  /* Formatted print (to test values are being input properly)
   Serial.print("Button: ");
   Serial.println(buttonState);
 
@@ -23,10 +28,12 @@ void loop() {
   Serial.println(potentiometerState);
 
   Serial.print("Joystick: ");
-  int xVal = analogRead(xyzPins[0]);
-  int yVal = analogRead(xyzPins[1]);
-  int zVal = digitalRead(xyzPins[2]);
   Serial.printf("%d,%d,%d", xVal, yVal, zVal);
+  
+  */
+
+  //Unformatted print (to be read by processing)
+  Serial.printf("%d,%d,%d,%d,%d", buttonState, potentiometerState, xJoystick, yJoystick, zJoystick);
   Serial.println();
   delay(1000);
 }
