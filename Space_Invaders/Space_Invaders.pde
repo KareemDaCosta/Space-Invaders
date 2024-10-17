@@ -22,10 +22,14 @@ ArrayList bullets = new ArrayList();
 int direction = 1;
 boolean incy = false;
 int score = 0;
-PFont f;
+PFont levelFont;
+PFont scoreFont;
+
+int numEnemies = 5;
 
 void setup()
 {
+  size(500, 500);
   //Used for getting proper port
   //printArray(Serial.list());
   String portName = Serial.list()[2];
@@ -39,7 +43,8 @@ void setup()
   player = new Player();
   createEnemies();
 
-  f = createFont("Arial", 36, true);
+  scoreFont = createFont("Arial", 36, true);
+  scoreFont = createFont("Arial", 50, true);
 }
 
 void draw()
@@ -95,19 +100,30 @@ void draw()
             enemy.draw();
         }
     }
+    
+    if(enemies.size() == 0) {
+       triggerNextLevel(); 
+    }
 
     incy = false;
   }    
 }
 
+void triggerNextLevel() {
+  textFont(levelFont);
+  text("Level Complete!", width/2, height/2);
+  delay(2000);
+  createEnemies();
+}
+
 void drawScore() {
-    textFont(f);
+    textFont(scoreFont);
     text("Score: " + String.valueOf(score), 300, 50);
 }
 
 void createEnemies() {
     for (int i = 0; i < width/gridsize/2; i++) {
-        for (int j = 0; j <= 5; j++) {
+        for (int j = 0; j <= numEnemies; j++) {
             enemies.add(new Enemy(i*gridsize, j*gridsize + 70));
         }
     }
