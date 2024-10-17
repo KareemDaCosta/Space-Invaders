@@ -35,5 +35,5 @@ void loop() {
   //Unformatted print (to be read by processing)
   Serial.printf("%d,%d,%d,%d,%d", buttonState, potentiometerState, xJoystick, yJoystick, zJoystick);
   Serial.println();
-  delay(1000);
+  delay(100);
 }
