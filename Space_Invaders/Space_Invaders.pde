@@ -1,8 +1,3 @@
-/*
- Serial Button Example
- Do something when the ESP32 L and R buttons are pressed
- */
-
 import processing.serial.*;
 
 Serial myPort;  // Create object from Serial class
@@ -25,7 +20,10 @@ int score = 0;
 PFont levelFont;
 PFont scoreFont;
 
-int numEnemies = 5;
+int level = 0;
+int numEnemies = 6;
+int nextLevelTimer = 0;
+int enemySpeed = 30;
 
 void setup()
 {
@@ -44,7 +42,7 @@ void setup()
   createEnemies();
 
   scoreFont = createFont("Arial", 36, true);
-  scoreFont = createFont("Arial", 50, true);
+  levelFont = createFont("Arial", 50, true);
 }
 
 void draw()
@@ -91,6 +89,12 @@ void draw()
             break;
         }
     }
+  if(nextLevelTimer > 0) {
+     nextLevelTimer -=1;
+    textFont(levelFont);
+    text("Level Complete!", 200, height/2);
+  }
+  else {
 
     for (int i = 0; i < enemies.size(); i++) {
         Enemy enemy = (Enemy) enemies.get(i);
@@ -104,15 +108,23 @@ void draw()
     if(enemies.size() == 0) {
        triggerNextLevel(); 
     }
-
+  }
     incy = false;
   }    
 }
 
 void triggerNextLevel() {
   textFont(levelFont);
-  text("Level Complete!", width/2, height/2);
-  delay(2000);
+  text("Level Complete!", 200, height/2);
+  nextLevelTimer = 100;
+  level += 1;
+  if(level % 3 == 0) {
+    numEnemies += 1; 
+    enemySpeed += 3;
+  }
+  else if(enemySpeed > 10) {
+     enemySpeed -= 3; 
+  }
   createEnemies();
 }
 
@@ -123,7 +135,7 @@ void drawScore() {
 
 void createEnemies() {
     for (int i = 0; i < width/gridsize/2; i++) {
-        for (int j = 0; j <= numEnemies; j++) {
+        for (int j = 0; j < numEnemies; j++) {
             enemies.add(new Enemy(i*gridsize, j*gridsize + 70));
         }
     }
@@ -213,7 +225,7 @@ class Enemy extends SpaceShip {
     }
 
     void updateObj() {
-        if (frameCount%30 == 0) {
+        if (frameCount%enemySpeed == 0) {
             x += direction * gridsize;
         }
         
@@ -233,7 +245,7 @@ class Enemy extends SpaceShip {
                 nextColor = color(255, 0, 0);
                 
                 if (life == 0) {
-                    score += 50;
+                    score += 50 + 25 * level;
                     return false;
                 }
                 
