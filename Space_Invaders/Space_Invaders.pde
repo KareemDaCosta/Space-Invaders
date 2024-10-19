@@ -25,6 +25,9 @@ int numEnemies = 6;
 int nextLevelTimer = 0;
 int enemySpeed = 30;
 
+int nextGunOverheat = 0;
+int overheatValue = 0;
+
 void setup()
 {
   size(500, 500);
@@ -43,12 +46,28 @@ void setup()
 
   scoreFont = createFont("Arial", 36, true);
   levelFont = createFont("Arial", 50, true);
+  
+  if (myPort.available() > 0) {  
+    val = myPort.readStringUntil('\n').trim();  
+  }
+  if (val != null){
+    int[] inputs = int(val.split(","));
+    potentiometerState = inputs[1]; 
+    if(potentiometerState == 0) {
+     nextGunOverheat = 4095; 
+    }
+    else {
+       nextGunOverheat = 0; 
+    }
+  }
+   
 }
 
 void draw()
 {
   background(0);
   textSize(16);
+  noStroke();
   
   if (myPort.available() > 0) {  
     val = myPort.readStringUntil('\n').trim();  
@@ -61,18 +80,31 @@ void draw()
     joystickY = inputs[3];
     joystickZ = inputs[4];
     
-    /*Test inputs are being read properly 
-    println("Button: ", buttonState);
+    /*Test inputs are being read properly */
+    /*println("Button: ", buttonState);
     println("Potentiometer: ", potentiometerState);
     println("Joystick: ", joystickX, joystickY, joystickZ);
     
     textAlign(CENTER);
-    text(val, width/2, height/2);
-    */
+    text(val, width/2, height/2);*/
+    
     
     background(0);
     
+    if(overheatValue > 0 && overheatValue < 100) {
+      overheatValue -= 1;
+    }
+    if(potentiometerState == nextGunOverheat) {
+       overheatValue = 0;
+       if(potentiometerState == 0) {
+          nextGunOverheat = 4095; 
+       }
+       else {
+           nextGunOverheat = 0; 
+       }
+    }
     drawScore();
+    drawOverheat();
 
     player.draw();
 
@@ -131,6 +163,14 @@ void triggerNextLevel() {
 void drawScore() {
     textFont(scoreFont);
     text("Score: " + String.valueOf(score), 300, 50);
+}
+
+void drawOverheat() {
+ fill(0);
+ stroke(255);
+ rect(width - 28, height - 108, 22, 102);
+ fill(255, 0, 0);
+ rect(width - 27, height - 8 - overheatValue, 20, overheatValue);
 }
 
 void createEnemies() {
@@ -197,10 +237,17 @@ class Player extends SpaceShip {
         }
         
         if (buttonState == 0 && canShoot) {
+          if(overheatValue < 100) {
             bullets.add(new Bullet(x, y));
             canShoot = false;
             shootdelay = 0;
+            overheatValue += 24;
+            if(overheatValue > 100) {
+               overheatValue = 100; 
+            }
+          }
         }
+        
 
         shootdelay++;
         
