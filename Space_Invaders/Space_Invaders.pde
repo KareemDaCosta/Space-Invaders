@@ -194,9 +194,9 @@ class SpaceShip {
 
     void drawSprite(int xpos, int ypos) {
         fill(nextColor);
+        noStroke();
         
         nextColor = baseColor;
-      
         for (int i = 0; i < sprite.length; i++) {
             String row = (String) sprite[i];
 
@@ -206,6 +206,7 @@ class SpaceShip {
                 }
             }
         }
+        fill(255, 255, 255);
     }
 
     void updateObj() {
@@ -260,9 +261,16 @@ class Player extends SpaceShip {
 class Enemy extends SpaceShip {
     int life = 3;
     
+    color[] enemyColors = {
+      color(0, 255, 255),
+      color(0, 255, 0),
+      color(255, 255, 0),
+    };
+    
     Enemy(int xpos, int ypos) {
         x = xpos;
         y = ypos;
+        baseColor = enemyColors[int(random(3))];
         sprite    = new String[5];
         sprite[0] = "1011101";
         sprite[1] = "0101010";
