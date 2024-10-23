@@ -3,7 +3,7 @@
 This project is an implementation of the classic arcade game Space Invaders on the ESP32. The movement is controlled via the joystick (left and right), and the button is used to fire the blasters. On top of the base game, I added an overheat mechanic: if the blasters are fired too frequently, then the player has to rotate the potentiometer to reset the heat back to 0. The goal of this project was to create a hardware/software interactive version of space invaders that mimics old-school arcades.
 
 ## Project GIF
-![](./media/demo.gif)
+![](https://github.com/KareemDaCosta/Space-Invaders/blob/main/media/demo.gif?raw=true)
 
 ## Recreation
 To recreate this project, you will need the following:
