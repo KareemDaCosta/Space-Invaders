@@ -71,3 +71,6 @@ To create the enclosure, follow these steps:
 After completing your enclosure and connections, your breadboard-enclosure pair should look like this:
 ![](https://i.ibb.co/g3vYfRx/circuit1.jpg)
 ![](https://i.ibb.co/kgvbN2B/circuit2.jpg)
+
+## Credits
+I used [this gist](https://gist.github.com/ihavenonickname/5cc5b9b1d9b912f704061a241bc096ad) as a skeleton for my processing code. Thank you to the author ihavenonnickname!
