@@ -4,6 +4,7 @@ This project is an implementation of the classic arcade game Space Invaders on t
 
 ## Project GIF
 ![](https://github.com/KareemDaCosta/Space-Invaders/blob/main/media/demo.gif)
+
 *This takes a second to load!*
 
 ## Recreation
