@@ -52,9 +52,9 @@ Using the included dxf files, you can create the following enclosure
 To create the enclosure, follow these steps:
 1. Download the dxf files included in this Github repository
 2. Using a laser printer, cut the following:
-  1x enclosure_bottom_1.dxf
-  1x enclosure_bottom_2.dxf
-  2x middle_layer.dxf
+  1x enclosure_bottom_1.dxf |
+  1x enclosure_bottom_2.dxf |
+  2x middle_layer.dxf |
   2x enclosure_top.dxf
 3. Stack the two bottom enclosure on top of each other (enclosure_bottom_1 should be underneath enclosure_bottom_2)
 4. Place the joystick in the joystick slot in the enclosure and insert the two shorter screws into the holes, securing the joystick to the enclosure. Secure the screws using two of the nuts
@@ -73,4 +73,4 @@ After completing your enclosure and connections, your breadboard-enclosure pair 
 ![](https://i.ibb.co/kgvbN2B/circuit2.jpg)
 
 ## Credits
-I used [this gist](https://gist.github.com/ihavenonickname/5cc5b9b1d9b912f704061a241bc096ad) as a skeleton for my processing code. Thank you to the author ihavenonnickname!
+I used [this gist](https://gist.github.com/ihavenonickname/5cc5b9b1d9b912f704061a241bc096ad) as a skeleton for my processing code. Thank you to the author **ihavenonnickname**!
