@@ -19,8 +19,8 @@ To recreate this project, you will need the following:
 
 If you want to create the enclosure, you will need the following:
 - 5 additional M-F jumper cables
-- 2 shorter screws with corresponding nuts
-- 2 longer screws with corresponding nuts
+- 2 M3*10 screws with corresponding nuts
+- 2 M3*20 screws with corresponding nuts
 - Hot glue
 - 1/8 inch plywood
 - Access to a laser cutter
